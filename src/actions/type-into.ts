@@ -28,7 +28,8 @@ import { typeMistake } from "./type-mistake"
 export const typeInto = async (
   element: ElementHandle,
   text: string,
-  config: TypeIntoOptions = {}
+  config: TypeIntoOptions = {},
+  cursor: any = null
 ): Promise<PerformanceTimer> => {
   // Validate config and inject defaults.
   const { delays, mistakes } = TypeIntoSchema.parse(config)
@@ -39,12 +40,17 @@ export const typeInto = async (
   // Break input string into individual letters.
   const chars: string[] = [...text]
 
-  // Click element to allow text input.
-  // TODO: Add mouse lib to avoid clicking in the dead center of the element.
-  await element.hover()
-  await waitForTimeout({ min: 100, max: 200 })
-  await element.click({ delay: rand({ min: 5, max: 15 }) })
-  await waitForTimeout({ min: 200, max: 800 })
+  if (cursor) {
+    await cursor.click(element)
+    await waitForTimeout({ min: 500, max: 1500 })
+  } else {
+    // Click element to allow text input.
+    // TODO: Add mouse lib to avoid clicking in the dead center of the element.
+    await element.hover()
+    await waitForTimeout({ min: 100, max: 200 })
+    await element.click({ delay: rand({ min: 5, max: 15 }) })
+    await waitForTimeout({ min: 200, max: 800 })
+  }
 
   // Type each character in sequence.
   let position: number = 0
