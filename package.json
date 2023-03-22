@@ -34,6 +34,7 @@
     "prepublish": "run-s build"
   },
   "dependencies": {
+    "@forad/puppeteer-humanize": "github:eth-stack/puppeteer-humanize",
     "debug": "^4.3.2",
     "mersenne-twister": "^1.1.0",
     "puppeteer-core": "^19.7.5",

@@ -1,1 +1,0 @@
-{"version":3,"file":"puppeteer.js","sourceRoot":"","sources":["../../src/types/puppeteer.ts"],"names":[],"mappings":"","sourcesContent":["import type * as Puppeteer from \"puppeteer-core\"\n\nexport type Page = Puppeteer.Page\nexport type ElementHandle = Puppeteer.ElementHandle\n"]}
